@@ -1,0 +1,11 @@
+android/
+ios/
+linux/
+macos/
+test/
+web/
+windows/
+
+pubspec.lock
+
+autogpt_frontend.iml
