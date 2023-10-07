@@ -5,7 +5,11 @@ macos/
 test/
 web/
 windows/
+.idea
+.metadata
 
 pubspec.lock
 
 autogpt_frontend.iml
+
+.dart_tool
