@@ -3,65 +3,84 @@ import 'package:flutter/material.dart';
 class SignInForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: Wrap(
-        //crossAxisAlignment: WrapCrossAlignment.center,
-        alignment: WrapAlignment.center,
-        spacing: 20, // to apply margin in the main axis of the wrap
-        runSpacing: 20, // to apply margin in the cross axis of the wrap
-        children: [
-          _welcomeText(),
-          _emailField(),
-          _passwordField(),
-          _loginButton()
-        ],
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        margin: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              WelcomeTextWidget(),
+              LoginFormWidget(),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-Widget _welcomeText() {
-  return const Text("Рады видеть вас снова!");
+class WelcomeTextWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+      "Рады видеть вас снова!",
+      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    );
+  }
 }
 
-// class WelcomeText extends StatelessWidget {
-//   const WelcomeText({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Container(
-//       child: Text(),
-//     );
-//   }
-// }
-
-Widget _passwordField() {
-  return const SizedBox(
-      child: TextField(
-        obscureText: true,
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'Пароль',
-        ),
+class LoginFormWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 300,
+      width: 400,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _emailField(),
+          _passwordField(),
+          _loginButton(),
+        ],
       ),
     );
-}
+  }
 
-Widget _emailField() {
-  return const SizedBox(
-      child: TextField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'E-mail',
+  Widget _passwordField() {
+    return const TextField(
+      obscureText: true,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0), // Adjust the radius as needed
+          ),
         ),
+        labelText: 'Пароль',
       ),
     );
-}
+  }
 
-Widget _loginButton() {
-  return ElevatedButton( 
-  onPressed: () {}, 
-  child: const Text('Вход')
-  );
+  Widget _emailField() {
+    return const TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0), // Adjust the radius as needed
+          ),
+        ),
+        labelText: 'E-mail',
+      ),
+    );
+  }
+
+  Widget _loginButton() {
+    return MaterialButton(onPressed: () {}, child: const Text('Вход'));
+  }
 }
