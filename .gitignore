@@ -6,6 +6,8 @@ test/
 web/
 windows/
 
+.dart_tool/
 pubspec.lock
+build/
 
 autogpt_frontend.iml
