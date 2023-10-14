@@ -13,3 +13,5 @@ pubspec.lock
 autogpt_frontend.iml
 
 .dart_tool
+
+build/
