@@ -1,0 +1,18 @@
+{
+  "gladToSeeYouAgain": "Glad to see you again!",
+  "@gladToSeeYouAgain": {
+    "description": "Login screen greetings message"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Login screen password field text"
+  },
+  "email":"E-mail",
+  "@email": {
+    "description": "Login screen email field text"
+  },
+  "signIn":"Sign In",
+  "@signIn": {
+    "description": "Login screen signIn button text"
+  }
+}
