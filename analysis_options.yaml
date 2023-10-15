@@ -21,7 +21,21 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
+    always_declare_return_types: true
+    avoid_print: true  # Uncomment to disable the `avoid_print` rule
+    always_put_control_body_on_new_line: true
+    always_require_non_null_named_parameters: true
+    # always_specify_types: true
+    always_use_package_imports: true
+    # Style rules 
+    camel_case_types: true
+    library_names: true
+    avoid_catches_without_on_clauses: true
+    avoid_catching_errors: true
+    avoid_empty_else: true
+    unnecessary_brace_in_string_interps: true
+    avoid_redundant_argument_values: true
+    leading_newlines_in_multiline_strings: true
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 
 # Additional information about this file can be found at
