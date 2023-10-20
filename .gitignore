@@ -5,7 +5,9 @@ macos/
 test/
 web/
 windows/
-
+**/.DS_Store
+.dart_tool/
 pubspec.lock
+build/
 
 autogpt_frontend.iml
