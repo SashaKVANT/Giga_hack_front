@@ -14,5 +14,13 @@
   "signIn":"Sign In",
   "@signIn": {
     "description": "Login screen signIn button text"
+  },
+  "enterEmailAddress": "Enter email address",
+  "@enterEmailAddress": {
+    "description": "Login screen email address entry prompt"
+  },
+  "forgotPasswordRestore": "Forgot password? Restore",
+  "@forgotPasswordRestore": {
+    "description": "Login screen prompt for users who forgot their password"
   }
 }

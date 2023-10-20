@@ -12,14 +12,13 @@ class SignInForm extends StatelessWidget {
         margin: const EdgeInsets.all(10.0),
         padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: const Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              WelcomeTextWidget(),
               LoginFormWidget(),
             ],
           ),
@@ -29,81 +28,66 @@ class SignInForm extends StatelessWidget {
   }
 }
 
-class WelcomeTextWidget extends StatelessWidget {
-  const WelcomeTextWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      AppLocalizations.of(context).gladToSeeYouAgain,
-      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-    );
-  }
+Widget _welcomeText(BuildContext context) {
+  return Text(
+    AppLocalizations.of(context).gladToSeeYouAgain,
+    style: Theme.of(context).textTheme.headlineLarge
+  );
 }
 
 class LoginFormWidget extends StatelessWidget {
   const LoginFormWidget({super.key});
 
   @override
-  // Widget build(BuildContext context) {
-  //   return SizedBox(
-  //     height: 200,
-  //     width: 400,
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.center, // center the content
-  //       children: [
-  //         Flexible(child: _emailField()),      // wrap with Flexible
-  //         SizedBox(height: 20),                // space between widgets
-  //         Flexible(child: _passwordField()),  // wrap with Flexible
-  //         SizedBox(height: 20),                // space between widgets
-  //         _loginButton(),
-  //       ],
-  //     ),
-  //   );
-  // }
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 400,
       width: 400,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          _welcomeText(context),
           _emailField(context),
           _passwordField(context),
-          _loginButton(context),
+          _loginButton(context)
         ],
       ),
     );
   }
 
-  Widget _passwordField(context) {
+  Widget _passwordField(BuildContext context) {
     return TextField(
       obscureText: true,
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(8.0), // Adjust the radius as needed
+            Radius.circular(8.0),
           ),
         ),
-        labelText: AppLocalizations.of(context).password,
+        hintText: AppLocalizations.of(context).password,
+        helperText: AppLocalizations.of(context).forgotPasswordRestore
       ),
     );
   }
 
-  Widget _emailField(context) {
+  Widget _emailField(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(8.0), // Adjust the radius as needed
+            Radius.circular(8.0),
           ),
         ),
-        labelText: AppLocalizations.of(context).email,
+        hintText: AppLocalizations.of(context).email,
+        helperText: AppLocalizations.of(context).enterEmailAddress
       ),
     );
   }
 
-  Widget _loginButton(context) {
-    return MaterialButton(onPressed: () {}, child: Text(AppLocalizations.of(context).signIn));
+  Widget _loginButton(BuildContext context) {
+    return FilledButton(
+      onPressed: () {},
+      child: Text(AppLocalizations.of(context).signIn),
+    );
   }
 }

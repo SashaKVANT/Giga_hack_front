@@ -25,7 +25,7 @@ class SignInPage extends StatelessWidget {
             top: 0,
             bottom: 0,
             width: MediaQuery.of(context).size.width * (2 / 3),
-            child: const SignInForm(),
+            child: const SignInForm()
           ),
         ],
       ),

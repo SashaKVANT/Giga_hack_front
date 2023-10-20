@@ -2,5 +2,7 @@
   "gladToSeeYouAgain": "Рады видеть вас снова!",
   "password": "Пароль",
   "email":"E-mail",
-  "signIn":"Вход"
+  "signIn":"Войти",
+  "enterEmailAddress": "Введите адрес электронной почты",
+  "forgotPasswordRestore": "Забыли пароль? Восстановить"
 }
