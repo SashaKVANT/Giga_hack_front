@@ -1,3 +1,4 @@
+import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card_list.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/button_agent_add.dart';
@@ -12,7 +13,7 @@ class AgentStartScreen extends StatefulWidget {
 }
 
 class _AgentStartScreenState extends State<AgentStartScreen> {
-  int _selectedIndex = 0;
+  late int? _selectedIndex;
   NavigationRailLabelType labelType = NavigationRailLabelType.none;
   double groupAlignment = -1.0;
 
@@ -26,11 +27,24 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
     });
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = null; // Начальное значение null
+  }
+
   void onDestinationSelected(int index) {
     setState(() {
       _selectedIndex = index;
     });
+    if (_selectedIndex == 0) {
+      Navigator.pushNamed(context, '/B');
+    } else if (_selectedIndex == 1) {
+      Navigator.pushNamed(context, '/C');
+    }
   }
+
+  // Тест навигации
 
   @override
   Widget build(BuildContext context) {
