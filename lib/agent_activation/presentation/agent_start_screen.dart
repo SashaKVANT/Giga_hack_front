@@ -51,6 +51,7 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
     return Scaffold(
         body: SafeArea(
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               NavigationRail(
                   backgroundColor: const Color.fromARGB(255, 6, 98, 255),
@@ -64,14 +65,14 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
               // This is the main content.
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(48.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          height: 100,
+                          height: 50,
                         ),
                         RowAboveCard(),
                         Wrap(
