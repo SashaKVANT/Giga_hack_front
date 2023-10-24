@@ -9,6 +9,7 @@ windows/
 .metadata
 
 pubspec.lock
+build/
 
 autogpt_frontend.iml
 
