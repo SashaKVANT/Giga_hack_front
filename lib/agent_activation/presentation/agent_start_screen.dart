@@ -1,6 +1,5 @@
-import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
+// import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card.dart';
-import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card_list.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/button_agent_add.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/text_button_above_card.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
     _selectedIndex = null; // Начальное значение null
   }
 
-  void onDestinationSelected(int index) {
+  void _onDestinationSelected(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -54,11 +53,11 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               NavigationRail(
-                  backgroundColor: const Color.fromARGB(255, 6, 98, 255),
+                  backgroundColor: Color(0xFF2E4BE6),
                   // minWidth: 100.0,
                   selectedIndex: _selectedIndex,
                   groupAlignment: groupAlignment,
-                  onDestinationSelected: onDestinationSelected,
+                  onDestinationSelected: _onDestinationSelected,
                   labelType: labelType,
                   destinations: _destinationsMenuEdit()),
               const VerticalDivider(thickness: 1, width: 1),
@@ -77,7 +76,7 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
                         RowAboveCard(),
                         Wrap(
                             direction: Axis.horizontal,
-                            children: buildCardList(cardData)),
+                            children: _buildCardList(cardData)),
                         SizedBox(height: 10),
                       ],
                     ),
@@ -90,6 +89,15 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
         floatingActionButton: ButtonAgentAdd(
           onIncrement: cardCounter,
         ));
+  }
+
+  List<Widget> _buildCardList(List<String> cardData) {
+    return cardData.map((text) {
+      return SizedBox(
+          child: WorkingAgentCard(
+        text: text,
+      ));
+    }).toList();
   }
 }
 
