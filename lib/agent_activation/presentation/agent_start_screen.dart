@@ -34,13 +34,14 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
 
   void _onDestinationSelected(int index) {
     setState(() {
-      _selectedIndex = index;
+      print('change stage');
+      //   _selectedIndex = index;
+      // });
+      // if (_selectedIndex == 0) {
+      //   Navigator.pushNamed(context, '/B');
+      // } else if (_selectedIndex == 1) {
+      //   Navigator.pushNamed(context, '/C');
     });
-    if (_selectedIndex == 0) {
-      Navigator.pushNamed(context, '/B');
-    } else if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, '/C');
-    }
   }
 
   // Тест навигации
@@ -71,9 +72,12 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          height: 50,
+                          height: 10,
                         ),
                         RowAboveCard(),
+                        SizedBox(
+                          height: 30,
+                        ),
                         Wrap(
                             direction: Axis.horizontal,
                             children: _buildCardList(cardData)),
@@ -106,7 +110,7 @@ List<NavigationRailDestination> _destinationsMenuEdit() {
     const NavigationRailDestination(
       icon: Icon(
         Icons.menu_rounded,
-        color: Colors.white70,
+        color: Color(0xFFFFFFFF),
       ),
       selectedIcon: Icon(
         Icons.menu_open_rounded,
@@ -116,7 +120,7 @@ List<NavigationRailDestination> _destinationsMenuEdit() {
     const NavigationRailDestination(
       icon: Icon(
         Icons.edit_outlined,
-        color: Colors.white70,
+        color: Color(0xFFFFFFFF),
       ),
       selectedIcon: Icon(
         Icons.edit,
