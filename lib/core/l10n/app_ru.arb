@@ -4,5 +4,6 @@
   "email":"E-mail",
   "signIn":"Войти",
   "enterEmailAddress": "Введите адрес электронной почты",
-  "forgotPasswordRestore": "Забыли пароль? Восстановить"
+  "forgotPasswordRestore": "Забыли пароль? Восстановить",
+  "textAboveAgentCards": "Мои запросы"
 }

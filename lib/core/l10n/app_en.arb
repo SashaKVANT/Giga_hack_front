@@ -22,5 +22,9 @@
   "forgotPasswordRestore": "Forgot password? Restore",
   "@forgotPasswordRestore": {
     "description": "Login screen prompt for users who forgot their password"
+  },
+  "textAboveAgentCards": "My requests",
+  "@textAboveAgentCards": {
+    "description": "Row above cards with agents to inform user which page he came"
   }
 }
