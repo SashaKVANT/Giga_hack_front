@@ -30,5 +30,50 @@
   "stopAgent": "Stop",
   "@stopAgent": {
     "description": "Text on agent stop button"
+  },
+  "restore": "Restore",
+  "@restore": {
+    "description": "Login screen prompt for users who haven't registered yet"
+  },
+  "signUp": "Sign up",
+  "@signUp": {
+    "description": "Login screen prompt for users who haven't registered yet"
+  },
+  "itsOkIfYouForgotYourPassword": "It's OK if you forgot your password",
+  "@itsOkIfYouForgotYourPassword": {
+    "description": "Reset password screen greetings message"
+  },
+  "newPassword": "New password",
+  "@newPassword": {
+    "description": "Reset password first field hint for resetting password"
+  },
+  "createAStrongPassword": "Create a strong password",
+  "@createAStrongPassword": {
+    "description": "Reset password helper text for create password field"
+  },
+  "repeatNewPassword": "Repeat new password",
+  "@repeatNewPassword": {
+    "description": "Reset password second field hint for resetting password"
+  },
+  "passwordsMustMatch": "Don't have an account? ",
+  "@passwordsMustMatch": {
+    "description": "Reset password helper text for create password second field"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset password screen reset button"
+  },
+  "goBack": "Go back",
+  "@goBack": {
+    "description": "Go back helper text for reset password screen"
+  },
+  "alreadyHaveAnAccount": "Already have an account? ",
+  "@goBack": {
+    "description": "Sign Up button helper text"
+  },
+  "hiLetsMeetCloser": "Hi! Let's meet closer",
+  "@goBhiLetsMeetCloserack": {
+    "description": "Sign Up welcome text"
   }
 }
+
