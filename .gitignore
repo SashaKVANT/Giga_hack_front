@@ -7,7 +7,14 @@ web/
 windows/
 **/.DS_Store
 .dart_tool/
+.idea
+.metadata
+
 pubspec.lock
 build/
 
 autogpt_frontend.iml
+
+.dart_tool
+
+build/
