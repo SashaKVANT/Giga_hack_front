@@ -16,6 +16,7 @@ class AppWidget extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         supportedLocales: L10n.all,
+        // locale: Locale('en', 'US'), # Для тестирования локалей
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
