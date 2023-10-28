@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RowAboveCard extends StatelessWidget {
   @override
@@ -9,19 +10,19 @@ class RowAboveCard extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        _expandedText(),
+        _myRequestsText(context),
         _roundedButton()
       ],
     );
   }
 }
 
-Widget _expandedText() {
+Widget _myRequestsText(BuildContext context) {
   return Expanded(
     child: Text(
-      'Мои запросы',
-      textScaleFactor: 2.0,
-      style: TextStyle(fontWeight: FontWeight.bold),
+      AppLocalizations.of(context).textAboveAgentCards,
+      style: Theme.of(context).textTheme.headlineLarge,
+      textScaleFactor: 1.0,
       maxLines: 1,
       // overflow: TextOverflow.ellipsis,
     ),
@@ -35,7 +36,6 @@ Widget _roundedButton() {
     },
     child: Icon(
       Icons.menu_rounded,
-      color: Color.fromARGB(179, 4, 230, 211),
     ),
     style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(

@@ -1,6 +1,5 @@
-import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
+// import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card.dart';
-import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card_list.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/button_agent_add.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/text_button_above_card.dart';
 import 'package:flutter/material.dart';
@@ -33,15 +32,16 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
     _selectedIndex = null; // Начальное значение null
   }
 
-  void onDestinationSelected(int index) {
+  void _onDestinationSelected(int index) {
     setState(() {
-      _selectedIndex = index;
+      print('change stage');
+      //   _selectedIndex = index;
+      // });
+      // if (_selectedIndex == 0) {
+      //   Navigator.pushNamed(context, '/B');
+      // } else if (_selectedIndex == 1) {
+      //   Navigator.pushNamed(context, '/C');
     });
-    if (_selectedIndex == 0) {
-      Navigator.pushNamed(context, '/B');
-    } else if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, '/C');
-    }
   }
 
   // Тест навигации
@@ -54,11 +54,11 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               NavigationRail(
-                  backgroundColor: const Color.fromARGB(255, 6, 98, 255),
+                  backgroundColor: Color(0xFF2E4BE6),
                   // minWidth: 100.0,
                   selectedIndex: _selectedIndex,
                   groupAlignment: groupAlignment,
-                  onDestinationSelected: onDestinationSelected,
+                  onDestinationSelected: _onDestinationSelected,
                   labelType: labelType,
                   destinations: _destinationsMenuEdit()),
               const VerticalDivider(thickness: 1, width: 1),
@@ -72,13 +72,27 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          height: 50,
+                          height: 10,
                         ),
                         RowAboveCard(),
-                        Wrap(
-                            direction: Axis.horizontal,
-                            children: buildCardList(cardData)),
-                        SizedBox(height: 10),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            mainAxisExtent: 305,
+                          ),
+                          itemCount: cardData.length,
+                          shrinkWrap:
+                              true, // Чтобы GridView не занимал бесконечно много места
+                          physics:
+                              NeverScrollableScrollPhysics(), // Отключить прокрутку GridView
+                          itemBuilder: (BuildContext context, int index) {
+                            return _gridElement(context, cardData, index);
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -93,12 +107,21 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
   }
 }
 
+Widget _gridElement(BuildContext context, List<String> cardData, int index) {
+  return WorkingAgentCard(
+    text: cardData[index],
+    image_url: 'https://source.unsplash.com/random/800x600?green',
+    subtitle: "subheading",
+    supporting: "supportingText",
+  );
+}
+
 List<NavigationRailDestination> _destinationsMenuEdit() {
   return [
     const NavigationRailDestination(
       icon: Icon(
         Icons.menu_rounded,
-        color: Colors.white70,
+        color: Color(0xFFFFFFFF),
       ),
       selectedIcon: Icon(
         Icons.menu_open_rounded,
@@ -108,7 +131,7 @@ List<NavigationRailDestination> _destinationsMenuEdit() {
     const NavigationRailDestination(
       icon: Icon(
         Icons.edit_outlined,
-        color: Colors.white70,
+        color: Color(0xFFFFFFFF),
       ),
       selectedIcon: Icon(
         Icons.edit,

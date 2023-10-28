@@ -23,12 +23,16 @@
   "@forgotPassword": {
     "description": "Login screen prompt for users who forgot their password"
   },
+  "textAboveAgentCards": "My requests",
+  "@textAboveAgentCards": {
+    "description": "Row above cards with agents to inform user which page he came"
+  },
+  "stopAgent": "Stop",
+  "@stopAgent": {
+    "description": "Text on agent stop button"
+  },
   "restore": "Restore",
   "@restore": {
-    "description": "Login screen prompt for users who forgot their password"
-  },
-  "dontHaveAnAccount": "Don't have an account? ",
-  "@dontHaveAnAccount": {
     "description": "Login screen prompt for users who haven't registered yet"
   },
   "signUp": "Sign up",
@@ -72,3 +76,4 @@
     "description": "Sign Up welcome text"
   }
 }
+

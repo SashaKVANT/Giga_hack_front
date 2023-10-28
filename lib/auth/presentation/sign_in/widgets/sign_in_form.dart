@@ -29,10 +29,8 @@ class SignInForm extends StatelessWidget {
 }
 
 Widget _welcomeText(BuildContext context) {
-  return Text(
-    AppLocalizations.of(context).gladToSeeYouAgain,
-    style: Theme.of(context).textTheme.headlineLarge
-  );
+  return Text(AppLocalizations.of(context).gladToSeeYouAgain,
+      style: Theme.of(context).textTheme.headlineLarge);
 }
 
 class LoginFormWidget extends StatelessWidget {
@@ -59,34 +57,35 @@ class LoginFormWidget extends StatelessWidget {
     return TextField(
       obscureText: true,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
           ),
-        ),
-        hintText: AppLocalizations.of(context).password,
-        helperText: AppLocalizations.of(context).forgotPasswordRestore
-      ),
+          hintText: AppLocalizations.of(context).password,
+          helperText: AppLocalizations.of(context).forgotPasswordRestore),
     );
   }
 
   Widget _emailField(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(8.0),
+          border: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.0),
+            ),
           ),
-        ),
-        hintText: AppLocalizations.of(context).email,
-        helperText: AppLocalizations.of(context).enterEmailAddress
-      ),
+          hintText: AppLocalizations.of(context).email,
+          helperText: AppLocalizations.of(context).enterEmailAddress),
     );
   }
 
   Widget _loginButton(BuildContext context) {
     return FilledButton(
-      onPressed: () {},
+      onPressed: () {
+        print("Login Succeeded");
+        Navigator.pushNamed(context, '/B');
+      },
       child: Text(AppLocalizations.of(context).signIn),
     );
   }
