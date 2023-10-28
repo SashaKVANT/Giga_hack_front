@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:autogpt_frontend/auth/presentation/sign_in/widgets/sign_in_form.dart';
@@ -7,27 +9,35 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double minHeight = 400; // Set this to your desired minimum height
+
+    double containerHeight = max(screenHeight, minHeight);
+
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      body: Stack(
-        children: [
-          // Image positioned to the right, full height
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: Image.asset('../../../../assets/auth.png', fit: BoxFit.cover, height: double.infinity),
-          ),
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: containerHeight),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                // SignInForm occupying the left 2/3 of the screen
+                const Expanded(
+                  flex: 2,
+                  child: SignInForm(),
+                ),
 
-          // SignInForm occupying the left 2/3 of the screen
-          Positioned(
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: MediaQuery.of(context).size.width * (2 / 3),
-            child: const SignInForm()
+                // Image occupying the right 1/3 of the screen
+                Expanded(
+                  child: Image.asset('../../../../assets/auth.png',
+                      fit: BoxFit.cover),
+                ),
+              ],
+            ),
           ),
-        ],
+        ),
       ),
     );
   }
