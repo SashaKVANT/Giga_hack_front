@@ -5,5 +5,7 @@
   "signIn":"Войти",
   "enterEmailAddress": "Введите адрес электронной почты",
   "forgotPasswordRestore": "Забыли пароль? Восстановить",
-  "textAboveAgentCards": "Мои запросы"
+  "textAboveAgentCards": "Мои запросы",
+  "agentName": "Карточка",
+  "stopAgent": "Остановить"
 }

@@ -26,5 +26,9 @@
   "textAboveAgentCards": "My requests",
   "@textAboveAgentCards": {
     "description": "Row above cards with agents to inform user which page he came"
+  },
+  "stopAgent": "Stop",
+  "@stopAgent": {
+    "description": "Text on agent stop button"
   }
 }
