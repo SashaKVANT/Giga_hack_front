@@ -78,10 +78,21 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
                         SizedBox(
                           height: 30,
                         ),
-                        Wrap(
-                            direction: Axis.horizontal,
-                            children: _buildCardList(cardData)),
-                        SizedBox(height: 10),
+                        GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            mainAxisExtent: 305,
+                          ),
+                          itemCount: cardData.length,
+                          shrinkWrap:
+                              true, // Чтобы GridView не занимал бесконечно много места
+                          physics:
+                              NeverScrollableScrollPhysics(), // Отключить прокрутку GridView
+                          itemBuilder: (BuildContext context, int index) {
+                            return _gridElement(context, cardData, index);
+                          },
+                        ),
                       ],
                     ),
                   ),
@@ -94,15 +105,15 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
           onIncrement: cardCounter,
         ));
   }
+}
 
-  List<Widget> _buildCardList(List<String> cardData) {
-    return cardData.map((text) {
-      return SizedBox(
-          child: WorkingAgentCard(
-        text: text,
-      ));
-    }).toList();
-  }
+Widget _gridElement(BuildContext context, List<String> cardData, int index) {
+  return WorkingAgentCard(
+    text: cardData[index],
+    image_url: 'https://source.unsplash.com/random/800x600?green',
+    subtitle: "subheading",
+    supporting: "supportingText",
+  );
 }
 
 List<NavigationRailDestination> _destinationsMenuEdit() {

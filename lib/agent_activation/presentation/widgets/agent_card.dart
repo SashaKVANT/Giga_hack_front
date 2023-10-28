@@ -5,7 +5,15 @@ import 'package:flutter/material.dart';
 
 class WorkingAgentCard extends StatefulWidget {
   final String text;
-  const WorkingAgentCard({super.key, required this.text});
+  final String image_url;
+  final String subtitle;
+  final String supporting;
+  const WorkingAgentCard(
+      {super.key,
+      required this.text,
+      required this.image_url,
+      required this.subtitle,
+      required this.supporting});
 
   @override
   State<WorkingAgentCard> createState() => _WorkingAgentCardState();
@@ -17,70 +25,54 @@ class _WorkingAgentCardState extends State<WorkingAgentCard> {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
       elevation: 4.0,
-      child: SizedBox(
-        width: 300,
-        child: Column(
-          children: [
-            AgentCardImage(),
-            AgentCardListTile(title: widget.text),
-            AgentCardSupportingText(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          _agentCardImage(widget.image_url),
+          _agentCardListTile(widget.text, widget.subtitle),
+          _agentCardSupportingText(widget.supporting),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: ButtonBar(
+              // mainAxisSize: MainAxisSize.min,
+              alignment: MainAxisAlignment.spaceBetween,
+              // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ButtonAgentStop(),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ButtonAgentDelete()),
+                ButtonAgentStop(),
+                ButtonAgentDelete(),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class AgentCardImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 120.0,
-      child: SizedBox(
-        child: Ink.image(
-          image: const NetworkImage(
-              'https://source.unsplash.com/random/800x600?green'),
-          fit: BoxFit.cover,
-        ),
+Widget _agentCardImage(String image_url) {
+  return Container(
+    height: 120.0,
+    child: SizedBox(
+      child: Ink.image(
+        image: NetworkImage(image_url),
+        fit: BoxFit.cover,
       ),
-    );
-  }
+    ),
+  );
 }
 
-class AgentCardListTile extends StatelessWidget {
-  final String title;
-
-  AgentCardListTile({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(title),
-      subtitle: Text("subheading"),
-      trailing: Icon(Icons.favorite_outline),
-    );
-  }
+Widget _agentCardListTile(String title, String subtitle) {
+  return ListTile(
+    title: Text(title),
+    subtitle: Text(subtitle),
+    trailing: Icon(Icons.favorite_outline),
+  );
 }
 
-class AgentCardSupportingText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      alignment: Alignment.centerLeft,
-      child: const Text("supportingText"),
-    );
-  }
+Widget _agentCardSupportingText(String supporting) {
+  return Container(
+    padding: const EdgeInsets.all(16.0),
+    alignment: Alignment.centerLeft,
+    child: Text(supporting),
+  );
 }
