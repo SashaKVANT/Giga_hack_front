@@ -5,6 +5,8 @@ macos/
 test/
 web/
 windows/
+**/.DS_Store
+.dart_tool/
 .idea
 .metadata
 

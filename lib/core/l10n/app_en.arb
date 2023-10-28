@@ -19,8 +19,8 @@
   "@enterEmailAddress": {
     "description": "Login screen email address entry prompt"
   },
-  "forgotPasswordRestore": "Forgot password? Restore",
-  "@forgotPasswordRestore": {
+  "forgotPassword": "Forgot password? ",
+  "@forgotPassword": {
     "description": "Login screen prompt for users who forgot their password"
   },
   "textAboveAgentCards": "My requests",
