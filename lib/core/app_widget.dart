@@ -1,4 +1,7 @@
+<<<<<<< lib/core/app_widget.dart
+import "package:autogpt_frontend/auth/presentation/sign_in/forgot_pass_page.dart";
 import "package:autogpt_frontend/auth/presentation/sign_in/sign_in_page.dart";
+import "package:autogpt_frontend/auth/presentation/sign_in/sign_up_page.dart";
 import "package:autogpt_frontend/core/l10n/l10n.dart";
 import "package:autogpt_frontend/core/theme/color_schema.dart";
 import "package:autogpt_frontend/core/theme/text_theme.dart";

@@ -4,5 +4,17 @@
   "email":"E-mail",
   "signIn":"Войти",
   "enterEmailAddress": "Введите адрес электронной почты",
-  "forgotPasswordRestore": "Забыли пароль? Восстановить"
+  "forgotPassword": "Забыли пароль? ",
+  "restore": "Восстановить",
+  "dontHaveAnAccount": "Еще нет аккаунта? ",
+  "signUp": "Зарегистрироваться",
+  "itsOkIfYouForgotYourPassword": "Забыли свой пароль? Это нормально",
+  "newPassword": "Новый пароль",
+  "createAStrongPassword": "Придумайте надежный пароль",
+  "repeatNewPassword": "Повторите пароль",
+  "passwordsMustMatch": "Пароли должны совпадать",
+  "reset": "Поменять",
+  "goBack": "Вернуться назад",
+  "alreadyHaveAnAccount": "Уже есть аккаунт? ",
+  "hiLetsMeetCloser": "Познакомимся поближе?"
 }
