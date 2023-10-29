@@ -63,7 +63,7 @@ class LoginFormWidget extends StatelessWidget {
             ),
           ),
           hintText: AppLocalizations.of(context).password,
-          helperText: AppLocalizations.of(context).forgotPasswordRestore),
+          helperText: AppLocalizations.of(context).forgotPassword),
     );
   }
 

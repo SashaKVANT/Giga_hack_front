@@ -1,6 +1,6 @@
 // import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card.dart';
-import 'package:autogpt_frontend/agent_activation/presentation/widgets/button_agent_add.dart';
+import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_screen_add_agent.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/text_button_above_card.dart';
 import 'package:flutter/material.dart';
 

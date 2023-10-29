@@ -35,6 +35,10 @@
   "@restore": {
     "description": "Login screen prompt for users who haven't registered yet"
   },
+  "dontHaveAnAccount": "Don't have an account? ",
+  "@dontHaveAnAccount": {
+    "description": "Login screen prompt for users who haven't registered yet"
+  },
   "signUp": "Sign up",
   "@signUp": {
     "description": "Login screen prompt for users who haven't registered yet"
