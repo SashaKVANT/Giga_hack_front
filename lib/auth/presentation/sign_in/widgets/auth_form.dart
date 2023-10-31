@@ -100,7 +100,9 @@ class AuthForm extends StatelessWidget {
             buttonText: buttonText,
             helperText: buttonHelperText ?? '',
             actionText: buttonActionText ?? '',
-            onButtonPressed: () {},
+            onButtonPressed: () {
+              Navigator.pushNamed(context, '/B');
+            },
             onActionTap: () {},
           ),
         ],

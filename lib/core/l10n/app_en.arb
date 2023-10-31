@@ -72,12 +72,16 @@
     "description": "Go back helper text for reset password screen"
   },
   "alreadyHaveAnAccount": "Already have an account? ",
-  "@goBack": {
+  "@alreadyHaveAnAccount": {
     "description": "Sign Up button helper text"
   },
   "hiLetsMeetCloser": "Hi! Let's meet closer",
-  "@goBhiLetsMeetCloserack": {
+  "@hiLetsMeetCloser": {
     "description": "Sign Up welcome text"
+  },
+  "enterAgentName": "Enter Agent Name:",
+  "@enterAgentName": {
+    "description": "Enter Agent Name in modal window"
   }
 }
 
