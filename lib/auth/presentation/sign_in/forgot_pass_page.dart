@@ -15,8 +15,10 @@ class ForgotPassPage extends StatelessWidget {
           primaryFieldHint: AppLocalizations.of(context).newPassword,
           primaryFieldHelper:
               AppLocalizations.of(context).createAStrongPassword,
+          isPrimaryFieldObscured: true,
           secondaryFieldHint: AppLocalizations.of(context).repeatNewPassword,
           secondaryFieldHelper: AppLocalizations.of(context).passwordsMustMatch,
+          isSecondaryFieldObscured: true,
           buttonText: AppLocalizations.of(context).reset,
           buttonActionText: AppLocalizations.of(context).goBack),
       imagePath: '../../../../assets/auth.png',

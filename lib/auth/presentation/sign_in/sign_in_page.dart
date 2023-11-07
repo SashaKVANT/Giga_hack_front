@@ -16,6 +16,7 @@ class SignInPage extends StatelessWidget {
           secondaryFieldHint: AppLocalizations.of(context).password,
           secondaryFieldHelper: AppLocalizations.of(context).forgotPassword,
           secondaryFieldActionText: AppLocalizations.of(context).restore,
+          isSecondaryFieldObscured: true,
           buttonText: AppLocalizations.of(context).signIn,
           buttonHelperText: AppLocalizations.of(context).dontHaveAnAccount,
           buttonActionText: AppLocalizations.of(context).signUp),
