@@ -16,8 +16,10 @@ class SignUpPage extends StatelessWidget {
           secondaryFieldHint: AppLocalizations.of(context).password,
           secondaryFieldHelper:
               AppLocalizations.of(context).createAStrongPassword,
+          isSecondaryFieldObscured: true,
           tertiaryFieldHint: AppLocalizations.of(context).repeatNewPassword,
           tertiaryFieldHelper: AppLocalizations.of(context).passwordsMustMatch,
+          isTertiaryFieldObscured: true,
           buttonText: AppLocalizations.of(context).signUp,
           buttonHelperText: AppLocalizations.of(context).alreadyHaveAnAccount,
           buttonActionText: AppLocalizations.of(context).signIn),

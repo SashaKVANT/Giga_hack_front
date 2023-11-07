@@ -21,8 +21,8 @@ const TextTheme appTextTheme = TextTheme(
   headlineMedium: TextStyle(
     fontFamily: 'InterTight',
     fontSize: 33,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0.25,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.8,
   ),
   headlineSmall: TextStyle(
     fontFamily: 'InterTight',

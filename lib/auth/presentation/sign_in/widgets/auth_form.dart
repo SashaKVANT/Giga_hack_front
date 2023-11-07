@@ -3,15 +3,22 @@ import 'package:flutter/material.dart';
 
 class AuthForm extends StatelessWidget {
   final String welcomeText;
+
   final String primaryFieldHint;
   final String? primaryFieldHelper;
   final String? primaryFieldActionText;
+  final bool isPrimaryFieldObscured;
+
   final String? secondaryFieldHint;
   final String? secondaryFieldHelper;
   final String? secondaryFieldActionText;
+  final bool isSecondaryFieldObscured;
+
   final String? tertiaryFieldHint;
   final String? tertiaryFieldHelper;
   final String? tertiaryFieldActionText;
+  final bool isTertiaryFieldObscured;
+
   final String buttonText;
   final String? buttonHelperText;
   final String? buttonActionText;
@@ -31,6 +38,9 @@ class AuthForm extends StatelessWidget {
     required this.buttonText,
     this.buttonHelperText,
     this.buttonActionText,
+    this.isPrimaryFieldObscured = false,
+    this.isSecondaryFieldObscured = false,
+    this.isTertiaryFieldObscured = false,
   }) : super(key: key);
 
   @override
@@ -79,6 +89,7 @@ class AuthForm extends StatelessWidget {
             hintText: primaryFieldHint,
             helperText: primaryFieldHelper,
             actionText: primaryFieldActionText,
+            isObscured: isPrimaryFieldObscured,
             onActionTap: () {},
           ),
           if (secondaryFieldHint != null)
@@ -87,6 +98,7 @@ class AuthForm extends StatelessWidget {
               helperText: secondaryFieldHelper,
               actionText: secondaryFieldActionText,
               onActionTap: () {},
+              isObscured: isSecondaryFieldObscured,
             ),
           if (tertiaryFieldHint != null)
             HelperActionTextField(
@@ -94,6 +106,7 @@ class AuthForm extends StatelessWidget {
               helperText: tertiaryFieldHelper,
               actionText: tertiaryFieldActionText,
               onActionTap: () {},
+              isObscured: isTertiaryFieldObscured,
             ),
           const SizedBox(height: 12.0),
           HelperActionFilledButton(
