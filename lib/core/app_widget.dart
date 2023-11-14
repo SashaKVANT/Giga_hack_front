@@ -33,6 +33,8 @@ class AppWidget extends StatelessWidget {
         routes: {
           '/A': (context) => SignInPage(),
           '/B': (context) => AgentStartScreen(),
+          '/C': (context) => ForgotPassPage(),
+          '/D': (context) => SignUpPage()
           // '/C': (context) => ProfilePage(),
           // home: AgentStartScreen(),
         });

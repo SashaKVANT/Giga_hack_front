@@ -72,12 +72,28 @@
     "description": "Go back helper text for reset password screen"
   },
   "alreadyHaveAnAccount": "Already have an account? ",
-  "@goBack": {
+  "@alreadyHaveAnAccount": {
     "description": "Sign Up button helper text"
   },
   "hiLetsMeetCloser": "Hi! Let's meet closer",
-  "@goBhiLetsMeetCloserack": {
+  "@hiLetsMeetCloser": {
     "description": "Sign Up welcome text"
+  },
+  "enterAgentName": "Enter Agent Name",
+  "@enterAgentName": {
+    "description": "Enter Agent Name in modal window"
+  },
+  "enterAgentAim": "Agent Aim:",
+  "@enterAgentAim": {
+    "description": "Enter Agent Aim in modal window"
+  },
+  "enterAgentSteps": "Steps count",
+  "@enterAgentSteps": {
+    "description": "Enter steps count in modal window"
+  },
+  "enterAgentDone": "Done",
+  "@enterAgentDone": {
+    "description": "Approve agent creation"
   }
 }
 

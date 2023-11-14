@@ -19,5 +19,9 @@
   "reset": "Поменять",
   "goBack": "Вернуться назад",
   "alreadyHaveAnAccount": "Уже есть аккаунт? ",
-  "hiLetsMeetCloser": "Познакомимся поближе?"
+  "hiLetsMeetCloser": "Познакомимся поближе?",
+  "enterAgentName": "Введите имя агента",
+  "enterAgentAim": "Цель агента:",
+  "enterAgentSteps": "Количество шагов",
+  "enterAgentDone": "Запустить"
 }
