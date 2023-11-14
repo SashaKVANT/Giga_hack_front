@@ -27,7 +27,8 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
   void cardCounter(List<String>? result) {
     if (result != null) {
       String agentNameText = result[0]; // Получить первый элемент
-      String aimText = result[1]; // Получить второй элемент
+      String aimText = result[1];
+      // Получить второй элемент
       setState(() {
         agentNames.add('$agentNameText');
         aimTexts.add('$aimText');
@@ -122,8 +123,8 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
     return WorkingAgentCard(
       text: agentNames[index],
       image_url: 'https://source.unsplash.com/random/800x600?green',
-      subtitle: aimTexts[index],
-      supporting: "supportingText",
+      subtitle: "subtitile!",
+      supporting: aimTexts[index],
     );
   }
 
@@ -153,20 +154,17 @@ Widget _modalWindow(
         CircularImage('../../../assets/agent_nevill.png'),
         AgentNameField(context, agentNameController),
         AimField(context, aimController),
+        TextAboveSlider(context),
         StepSlider(), //Еще один Stful Widget, мб запихнуть с state экрана?
         ElevatedButton(
           onPressed: () {
-            // Get the entered text from the text field
             List<String> AgentNameAimTexts = [
               agentNameController.text,
               aimController.text
             ];
-            // String agentNameText =
-            // String aimText =
-            // Close the dialog and return the entered text
             Navigator.of(context).pop(AgentNameAimTexts);
           },
-          child: Text("Done"),
+          child: Text(AppLocalizations.of(context).enterAgentDone),
         ),
       ],
     ),
