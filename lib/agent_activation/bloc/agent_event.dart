@@ -1,4 +1,8 @@
 part of 'agent_bloc.dart';
 
 @immutable
-sealed class AgentEvent {}
+abstract class AgentEvent {}
+
+class AgentCreateEvent extends AgentEvent {
+  //TODO
+}

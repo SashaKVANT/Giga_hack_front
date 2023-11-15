@@ -1,6 +1,10 @@
 part of 'agent_bloc.dart';
 
 @immutable
-sealed class AgentState {}
+abstract class AgentState {}
 
-final class AgentInitial extends AgentState {}
+class AgentInitial extends AgentState {}
+
+class AgentCreatedState extends AgentState {}
+
+class AgentCreatingState extends AgentState {}
