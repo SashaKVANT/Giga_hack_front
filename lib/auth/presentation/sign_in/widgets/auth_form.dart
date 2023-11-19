@@ -1,5 +1,7 @@
+import 'package:autogpt_frontend/auth/bloc/login_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthForm extends StatelessWidget {
   final String welcomeText;
@@ -53,7 +55,12 @@ class AuthForm extends StatelessWidget {
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Center(child: _authFormWidget(context)),
+        child: Center(
+          child: BlocProvider(
+            create: (context) => LoginBloc(),
+            child: _authFormWidget(context),
+          ),
+        ),
       ),
     );
   }
@@ -77,49 +84,59 @@ class AuthForm extends StatelessWidget {
       formHeight = 400; // default height for 1 field
     }
 
-    return SizedBox(
-      height: formHeight,
-      width: 400,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _welcome(context),
-          const SizedBox(height: 12.0),
-          HelperActionTextField(
-            hintText: primaryFieldHint,
-            helperText: primaryFieldHelper,
-            actionText: primaryFieldActionText,
-            isObscured: isPrimaryFieldObscured,
-            onActionTap: () {},
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return SizedBox(
+          height: formHeight,
+          width: 400,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _welcome(context),
+              const SizedBox(height: 12.0),
+              HelperActionTextField(
+                  hintText: primaryFieldHint,
+                  helperText: primaryFieldHelper,
+                  actionText: primaryFieldActionText,
+                  isObscured: isPrimaryFieldObscured,
+                  onActionTap: () {},
+                  func: (value) {
+                    context.read<LoginBloc>().add(LoginEmailChanged(value));
+                  }),
+              if (secondaryFieldHint != null)
+                HelperActionTextField(
+                    hintText: secondaryFieldHint!,
+                    helperText: secondaryFieldHelper,
+                    actionText: secondaryFieldActionText,
+                    onActionTap: () {},
+                    isObscured: isSecondaryFieldObscured,
+                    func: (value) {
+                      context
+                          .read<LoginBloc>()
+                          .add(LoginPasswordChanged(value));
+                    }),
+              if (tertiaryFieldHint != null)
+                HelperActionTextField(
+                  hintText: tertiaryFieldHint!,
+                  helperText: tertiaryFieldHelper,
+                  actionText: tertiaryFieldActionText,
+                  onActionTap: () {},
+                  isObscured: isTertiaryFieldObscured,
+                ),
+              const SizedBox(height: 12.0),
+              HelperActionFilledButton(
+                buttonText: buttonText,
+                helperText: buttonHelperText ?? '',
+                actionText: buttonActionText ?? '',
+                onButtonPressed: () {
+                  Navigator.pushNamed(context, '/B');
+                },
+                onActionTap: () {},
+              ),
+            ],
           ),
-          if (secondaryFieldHint != null)
-            HelperActionTextField(
-              hintText: secondaryFieldHint!,
-              helperText: secondaryFieldHelper,
-              actionText: secondaryFieldActionText,
-              onActionTap: () {},
-              isObscured: isSecondaryFieldObscured,
-            ),
-          if (tertiaryFieldHint != null)
-            HelperActionTextField(
-              hintText: tertiaryFieldHint!,
-              helperText: tertiaryFieldHelper,
-              actionText: tertiaryFieldActionText,
-              onActionTap: () {},
-              isObscured: isTertiaryFieldObscured,
-            ),
-          const SizedBox(height: 12.0),
-          HelperActionFilledButton(
-            buttonText: buttonText,
-            helperText: buttonHelperText ?? '',
-            actionText: buttonActionText ?? '',
-            onButtonPressed: () {
-              Navigator.pushNamed(context, '/B');
-            },
-            onActionTap: () {},
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -165,15 +182,16 @@ class HelperActionTextField extends StatelessWidget {
   final String? actionText;
   final VoidCallback? onActionTap;
   final bool isObscured;
+  final void Function(String value)? func;
 
-  const HelperActionTextField({
-    super.key,
-    required this.hintText,
-    this.helperText,
-    this.actionText,
-    this.onActionTap,
-    this.isObscured = false,
-  });
+  const HelperActionTextField(
+      {super.key,
+      required this.hintText,
+      this.helperText,
+      this.actionText,
+      this.onActionTap,
+      this.isObscured = false,
+      this.func});
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +199,7 @@ class HelperActionTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextField(
+          onChanged: (value) => func!(value),
           obscureText: isObscured,
           decoration: InputDecoration(
             border: const OutlineInputBorder(

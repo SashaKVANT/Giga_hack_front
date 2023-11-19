@@ -9,6 +9,7 @@ abstract class LoginEvent extends Equatable {
 }
 
 final class LoginEmailChanged extends LoginEvent {
+  //Пока что мы не трекаем эти события (я пока не разобрался)
   final String email;
   const LoginEmailChanged(this.email);
 
@@ -17,6 +18,7 @@ final class LoginEmailChanged extends LoginEvent {
 }
 
 final class LoginPasswordChanged extends LoginEvent {
+  //Пока что мы не трекаем эти события (я пока не разобрался)
   final String password;
   const LoginPasswordChanged(this.password);
 
@@ -24,6 +26,12 @@ final class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-final class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted();
+final class LoginPressed extends LoginEvent {
+  final String email;
+  final String password;
+
+  LoginPressed(this.email, this.password);
+
+  @override
+  List<Object> get props => [email, password];
 }
