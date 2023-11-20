@@ -30,16 +30,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(password: event.password));
   }
 
-  // void _onLoginPressed(event, emit) async {
-  //   if (event is LoginPressed) {
-  //     if (event.email.isEmpty || event.password.isEmpty) {
-  //       emit(LoginError());
-  //     } else {
-  //       emit(LoginLoading());
-  //       await Future.delayed(const Duration(seconds: 3), () {
-  //         emit(LoginLoaded(event.email));
-  //       });
-  //     }
-  //   }
-  // }
+  void _onLoginPressed(LoginPressed event, Emitter<LoginState> emit) async {
+    if (state.isValidEmail && state.isValidPassword) {
+      emit(state.copyWith(status: LoginFormState.loading));
+      await Future.delayed(const Duration(seconds: 3), () {
+        emit(state.copyWith(
+            status: LoginFormState
+                .loaded)); //Симуляция репозитория, нужно вставить репу (и выше в Bloc)
+      });
+    } else {
+      emit(state.copyWith(status: LoginFormState.error));
+    }
+  }
 }

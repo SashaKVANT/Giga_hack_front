@@ -1,6 +1,6 @@
 part of 'login_bloc.dart';
 
-// @immutable   Это все наработки по ролику от Индуса, надо переделать
+// @immutable //Это все наработки по ролику от Индуса, надо переделать
 // abstract class LoginState {}
 
 // class LoginInitial extends LoginState {
@@ -21,30 +21,52 @@ part of 'login_bloc.dart';
 //   final String email;
 //   final String password;
 
-//   LoginFormState(
-//     this.email,
-//     this.password,
+//   LoginFormState({
+//     this.email = '',
+//     this.password = '',
+//   }
 //   );
+
+//   LoginFormState copyWith({
+//     String? email,
+//     String? password,
+//   }) {
+//     return LoginFormState(
+//       email: email ?? this.email,
+//       password: password ?? this.password,
+//     );
+//   }
 // }
+enum LoginFormState {
+  initial,
+  loading,
+  loaded,
+  error,
+}
+
 class LoginState {
   final String email;
-  bool get isValidemail => email.length > 3;
+  bool get isValidEmail => email.length > 3;
 
   final String password;
   bool get isValidPassword => password.length > 6;
 
-  LoginState({
-    this.email = '',
-    this.password = '',
-  });
+  final LoginFormState status;
+
+  LoginState(
+      {this.email = '',
+      this.password = '',
+      this.status = LoginFormState.initial});
 
   LoginState copyWith({
     String? email,
     String? password,
+    LoginFormState? status,
   }) {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
+      status: status ?? this.status,
     );
   }
 }
