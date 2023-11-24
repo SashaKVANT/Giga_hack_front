@@ -1,3 +1,5 @@
+import 'package:autogpt_frontend/auth/bloc/form_submission_status.dart';
+import 'package:autogpt_frontend/auth/data/auth_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
@@ -8,10 +10,12 @@ part 'login_state.dart';
 //Implement Repo in constructor!
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginState()) {
+  final AuthRepository authRepo;
+
+  LoginBloc({required this.authRepo}) : super(LoginState()) {
     on<LoginEmailChanged>(_onEmailChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
-    // on<LoginEvent>(_onLoginPressed);
+    on<LoginSubmitted>(_onLoginPressed);
   }
 
   void _onEmailChanged(
@@ -30,16 +34,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(state.copyWith(password: event.password));
   }
 
-  void _onLoginPressed(LoginPressed event, Emitter<LoginState> emit) async {
+  void _onLoginPressed(LoginSubmitted event, Emitter<LoginState> emit) async {
     if (state.isValidEmail && state.isValidPassword) {
-      emit(state.copyWith(status: LoginFormState.loading));
-      await Future.delayed(const Duration(seconds: 3), () {
-        emit(state.copyWith(
-            status: LoginFormState
-                .loaded)); //Симуляция репозитория, нужно вставить репу (и выше в Bloc)
-      });
+      emit(state.copyWith(status: FormSubmitting(), valid: true));
+      try {
+        await authRepo.login();
+        emit(state.copyWith(status: SubmissionSuccess(), valid: true));
+        print("SubmissionSuccess");
+      } on String catch (e) {
+        emit(state.copyWith(status: SubmissionFailed(e), valid: true));
+      }
     } else {
-      emit(state.copyWith(status: LoginFormState.error));
+      print("zsdgsagsadgsdg");
+      emit(state.copyWith(valid: false));
     }
   }
 }

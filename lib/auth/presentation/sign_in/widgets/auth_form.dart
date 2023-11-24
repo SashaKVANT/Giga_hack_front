@@ -1,4 +1,6 @@
+import 'package:autogpt_frontend/auth/bloc/form_submission_status.dart';
 import 'package:autogpt_frontend/auth/bloc/login_bloc.dart';
+import 'package:autogpt_frontend/auth/data/auth_repository.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +26,19 @@ class AuthForm extends StatelessWidget {
   final String buttonText;
   final String? buttonHelperText;
   final String? buttonActionText;
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  void _showErrorSnackBar(BuildContext context, String messageError) {
+    final snackErrorBar = SnackBar(
+      content: Text(messageError),
+      backgroundColor: Colors.red,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackErrorBar);
+  }
 
   const AuthForm({
     Key? key,
@@ -56,9 +71,14 @@ class AuthForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Center(
-          child: BlocProvider(
-            create: (context) => LoginBloc(),
-            child: _authFormWidget(context),
+          child: RepositoryProvider(
+            create: (context) => AuthRepository(),
+            child: BlocProvider(
+              create: (context) => LoginBloc(
+                authRepo: context.read<AuthRepository>(),
+              ),
+              child: _authFormWidget(context),
+            ),
           ),
         ),
       ),
@@ -84,59 +104,85 @@ class AuthForm extends StatelessWidget {
       formHeight = 400; // default height for 1 field
     }
 
-    return BlocBuilder<LoginBloc, LoginState>(
-      builder: (context, state) {
-        return SizedBox(
-          height: formHeight,
-          width: 400,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _welcome(context),
-              const SizedBox(height: 12.0),
-              HelperActionTextField(
-                  hintText: primaryFieldHint,
-                  helperText: primaryFieldHelper,
-                  actionText: primaryFieldActionText,
-                  isObscured: isPrimaryFieldObscured,
-                  onActionTap: () {},
-                  func: (value) {
-                    context.read<LoginBloc>().add(LoginEmailChanged(value));
-                  }),
-              if (secondaryFieldHint != null)
-                HelperActionTextField(
-                    hintText: secondaryFieldHint!,
-                    helperText: secondaryFieldHelper,
-                    actionText: secondaryFieldActionText,
-                    onActionTap: () {},
-                    isObscured: isSecondaryFieldObscured,
-                    func: (value) {
-                      context
-                          .read<LoginBloc>()
-                          .add(LoginPasswordChanged(value));
-                    }),
-              if (tertiaryFieldHint != null)
-                HelperActionTextField(
-                  hintText: tertiaryFieldHint!,
-                  helperText: tertiaryFieldHelper,
-                  actionText: tertiaryFieldActionText,
-                  onActionTap: () {},
-                  isObscured: isTertiaryFieldObscured,
-                ),
-              const SizedBox(height: 12.0),
-              HelperActionFilledButton(
-                buttonText: buttonText,
-                helperText: buttonHelperText ?? '',
-                actionText: buttonActionText ?? '',
-                onButtonPressed: () {
-                  Navigator.pushNamed(context, '/B');
-                },
-                onActionTap: () {},
-              ),
-            ],
-          ),
-        );
+    return BlocListener<LoginBloc, LoginState>(
+      listenWhen: (previous, current) {
+        return previous.status != current.status ||
+            previous.valid != current.valid;
       },
+      listener: (context, state) {
+        final formStatus = state.status;
+        final valid = state.valid;
+        if (formStatus is SubmissionFailed) {
+          _showSnackBar(context, formStatus.exception);
+        }
+        if (!valid) {
+          _showErrorSnackBar(context, "Form is filled out incorrectly");
+        }
+      },
+      child: SizedBox(
+        height: formHeight,
+        width: 400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _welcome(context),
+            const SizedBox(height: 12.0),
+            BlocBuilder<LoginBloc, LoginState>(
+              builder: (context, state) {
+                return HelperActionTextField(
+                    hintText: primaryFieldHint,
+                    helperText: primaryFieldHelper,
+                    actionText: primaryFieldActionText,
+                    isObscured: isPrimaryFieldObscured,
+                    onActionTap: () {},
+                    func: (value) {
+                      context.read<LoginBloc>().add(LoginEmailChanged(value));
+                    });
+              },
+            ),
+            if (secondaryFieldHint != null)
+              BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, state) {
+                  return HelperActionTextField(
+                      hintText: secondaryFieldHint!,
+                      helperText: secondaryFieldHelper,
+                      actionText: secondaryFieldActionText,
+                      onActionTap: () {},
+                      isObscured: isSecondaryFieldObscured,
+                      func: (value) {
+                        context
+                            .read<LoginBloc>()
+                            .add(LoginPasswordChanged(value));
+                      });
+                },
+              ),
+            if (tertiaryFieldHint != null)
+              HelperActionTextField(
+                hintText: tertiaryFieldHint!,
+                helperText: tertiaryFieldHelper,
+                actionText: tertiaryFieldActionText,
+                onActionTap: () {},
+                isObscured: isTertiaryFieldObscured,
+              ),
+            const SizedBox(height: 12.0),
+            BlocBuilder<LoginBloc, LoginState>(
+              builder: (context, state) {
+                return state.status is FormSubmitting
+                    ? CircularProgressIndicator()
+                    : HelperActionFilledButton(
+                        buttonText: buttonText,
+                        helperText: buttonHelperText ?? '',
+                        actionText: buttonActionText ?? '',
+                        onButtonPressed: () {
+                          context.read<LoginBloc>().add(LoginSubmitted());
+                        },
+                        onActionTap: () {},
+                      );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

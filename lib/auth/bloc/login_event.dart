@@ -26,12 +26,9 @@ final class LoginPasswordChanged extends LoginEvent {
   List<Object> get props => [password];
 }
 
-final class LoginPressed extends LoginEvent {
-  final String email;
-  final String password;
-
-  LoginPressed(this.email, this.password);
+final class LoginSubmitted extends LoginEvent {
+  LoginSubmitted();
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [];
 }
