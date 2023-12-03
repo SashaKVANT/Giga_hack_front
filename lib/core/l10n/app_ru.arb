@@ -21,7 +21,7 @@
   "alreadyHaveAnAccount": "Уже есть аккаунт? ",
   "hiLetsMeetCloser": "Познакомимся поближе?",
   "enterAgentName": "Введите имя агента",
-  "enterAgentAim": "Цель агента:",
+  "enterAgentAim": "Ссылка на Telegram-канал",
   "enterAgentSteps": "Количество шагов",
   "enterAgentDone": "Запустить"
 }

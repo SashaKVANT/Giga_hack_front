@@ -1,16 +1,15 @@
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_screen_add_agent.dart';
-import 'package:autogpt_frontend/agent_activation/presentation/widgets/buttons_agent_card.dart';
 import 'package:flutter/material.dart';
 
 class WorkingAgentCard extends StatefulWidget {
   final String text;
-  final String image_url;
+  final String imagePath;
   final String subtitle;
   final String supporting;
   const WorkingAgentCard(
       {super.key,
       required this.text,
-      required this.image_url,
+      required this.imagePath,
       required this.subtitle,
       required this.supporting});
 
@@ -27,7 +26,7 @@ class _WorkingAgentCardState extends State<WorkingAgentCard> {
       child: ListView(
         shrinkWrap: true,
         children: [
-          _agentCardImage(widget.image_url),
+          _agentCardImage(widget.imagePath),
           _agentCardListTile(widget.text, widget.subtitle),
           _agentCardSupportingText(widget.supporting),
           Align(
@@ -37,6 +36,11 @@ class _WorkingAgentCardState extends State<WorkingAgentCard> {
               alignment: MainAxisAlignment.spaceBetween,
               // crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                ButtonTaskRedirect(
+                  text: widget.text,
+                  subtitle: widget.subtitle,
+                  supporting: widget.supporting,
+                ),
                 ButtonAgentStop(),
                 ButtonAgentDelete(),
               ],
@@ -48,13 +52,21 @@ class _WorkingAgentCardState extends State<WorkingAgentCard> {
   }
 }
 
-Widget _agentCardImage(String image_url) {
-  return Container(
-    height: 120.0,
+Widget _agentCardImage(String imagePath) {
+  return ClipRRect(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(
+          15.0), // Задайте радиус скругления для верхнего левого угла
+      topRight: Radius.circular(
+          15.0), // Задайте радиус скругления для верхнего правого угла
+    ),
     child: SizedBox(
-      child: Ink.image(
-        image: NetworkImage(image_url),
-        fit: BoxFit.cover,
+      child: Image.asset(
+        '$imagePath', // Путь к вашей картинке
+        width: 250.0,
+        height: 120.0,
+        fit:
+            BoxFit.fill, // Выберите подходящий вариант для отображения картинки
       ),
     ),
   );

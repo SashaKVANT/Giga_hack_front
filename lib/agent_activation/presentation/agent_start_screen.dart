@@ -1,4 +1,5 @@
 // import 'package:autogpt_frontend/agent_activation/presentation/screen_test.dart';
+import 'package:autogpt_frontend/agent_activation/data/api/post_telegram.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_card.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/agent_screen_add_agent.dart';
 import 'package:autogpt_frontend/agent_activation/presentation/widgets/modal_widgets.dart';
@@ -24,14 +25,20 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
   String aimText = "";
   List<String> aimTexts = [];
 
+  String aimStepsCount = "";
+  List<String> aimStepsCounts = [];
+
   void cardCounter(List<String>? result) {
     if (result != null) {
       String agentNameText = result[0]; // Получить первый элемент
       String aimText = result[1];
+      String aimStepsCount = result[2];
+
       // Получить второй элемент
       setState(() {
         agentNames.add('$agentNameText');
         aimTexts.add('$aimText');
+        aimStepsCounts.add('Число шагов: $aimStepsCount');
       });
     }
   }
@@ -97,8 +104,8 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
                         shrinkWrap:
                             true, // Чтобы GridView не занимал бесконечно много места
                         itemBuilder: (BuildContext context, int index) {
-                          return _gridElement(
-                              context, agentNames, aimTexts, index);
+                          return _gridElement(context, agentNames, aimTexts,
+                              aimStepsCounts, index);
                         },
                       ),
                     ],
@@ -119,23 +126,26 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
   }
 
   Widget _gridElement(BuildContext context, List<String> agentNames,
-      List<String> aimTexts, int index) {
+      List<String> aimTexts, List<String> aimStepsCounts, int index) {
     return WorkingAgentCard(
       text: agentNames[index],
-      image_url: 'https://source.unsplash.com/random/800x600?green',
-      subtitle: "subtitile!",
+      imagePath: '../../../assets/media.png',
       supporting: aimTexts[index],
+      subtitle: aimStepsCounts[index],
     );
   }
 
   Future<void> _showModal(BuildContext context) async {
     TextEditingController agentNameController = TextEditingController();
     TextEditingController aimController = TextEditingController();
+    TextEditingController auditoryNameController = TextEditingController();
+    final SliderValueNotifier sliderValueNotifier = SliderValueNotifier(1);
 
     List<String>? result = await showDialog<List<String>>(
       context: context,
       builder: (BuildContext context) {
-        return _modalWindow(context, agentNameController, aimController);
+        return _modalWindow(context, agentNameController, aimController,
+            auditoryNameController, sliderValueNotifier);
       },
     );
 
@@ -146,23 +156,33 @@ class _AgentStartScreenState extends State<AgentStartScreen> {
 Widget _modalWindow(
     BuildContext context,
     TextEditingController agentNameController,
-    TextEditingController aimController) {
+    TextEditingController channelController,
+    TextEditingController auditoryNameController,
+    SliderValueNotifier sliderValueNotifier) {
   return Dialog(
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CircularImage('../../../assets/agent_nevill.png'),
         AgentNameField(context, agentNameController),
-        AimField(context, aimController),
+        ChannelField(context, channelController),
+        AuditoryField(context, auditoryNameController),
         TextAboveSlider(context),
-        StepSlider(), //Еще один Stful Widget, мб запихнуть с state экрана?
+        StepSlider(
+          sliderValueNotifier: sliderValueNotifier,
+        ), //Еще один Stful Widget, мб запихнуть с state экрана?
         ElevatedButton(
           onPressed: () {
-            List<String> AgentNameAimTexts = [
+            List<String> AgentNameAimStepsTexts = [
               agentNameController.text,
-              aimController.text
+              channelController.text,
+              sliderValueNotifier.value.toString(),
             ];
-            Navigator.of(context).pop(AgentNameAimTexts);
+            Navigator.of(context).pop(AgentNameAimStepsTexts);
+            makeApiRequest(
+              sourceChannel: channelController.text,
+              auditoryName: auditoryNameController.text,
+            );
           },
           child: Text(AppLocalizations.of(context).enterAgentDone),
         ),

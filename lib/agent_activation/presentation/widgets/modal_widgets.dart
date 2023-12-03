@@ -36,9 +36,11 @@ Widget AgentNameField(
   );
 }
 
-Widget AimField(BuildContext context, TextEditingController textController) {
+Widget ChannelField(
+    BuildContext context, TextEditingController textController) {
   return SizedBox(
     width: 400,
+    height: 60,
     child: TextField(
       maxLines: 4,
       controller: textController,
@@ -54,6 +56,26 @@ Widget AimField(BuildContext context, TextEditingController textController) {
   );
 }
 
+Widget AuditoryField(
+    BuildContext context, TextEditingController textController) {
+  return SizedBox(
+    width: 400,
+    height: 60,
+    child: TextField(
+      maxLines: 4,
+      controller: textController,
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        hintText: "Целевая аудитория",
+      ),
+    ),
+  );
+}
+
 Widget TextAboveSlider(BuildContext context) {
   return SizedBox(
     width: 400,
@@ -64,9 +86,14 @@ Widget TextAboveSlider(BuildContext context) {
   );
 }
 
-class StepSlider extends StatefulWidget {
-  const StepSlider({super.key});
+class SliderValueNotifier extends ValueNotifier<double> {
+  SliderValueNotifier(double value) : super(value);
+}
 
+class StepSlider extends StatefulWidget {
+  final SliderValueNotifier sliderValueNotifier;
+  const StepSlider({Key? key, required this.sliderValueNotifier})
+      : super(key: key);
   @override
   State<StepSlider> createState() => _StepSliderState();
 }
@@ -78,15 +105,17 @@ class _StepSliderState extends State<StepSlider> {
     return SizedBox(
       width: 500,
       child: Slider(
-          value: _currentSliderValue,
-          max: 20,
-          divisions: 20,
-          label: _currentSliderValue.round().toString(),
-          onChanged: (double value) {
-            setState(() {
-              _currentSliderValue = value;
-            });
-          }),
+        value: _currentSliderValue,
+        max: 20,
+        divisions: 20,
+        label: _currentSliderValue.round().toString(),
+        onChanged: (double value) {
+          setState(() {
+            _currentSliderValue = value;
+          });
+          widget.sliderValueNotifier.value = value;
+        },
+      ),
     );
   }
 }

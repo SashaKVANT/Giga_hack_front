@@ -1,3 +1,5 @@
+import "package:autogpt_frontend/agent_activation/presentation/agent_create_task.dart";
+import "package:autogpt_frontend/agent_activation/presentation/agent_request_window.dart";
 import "package:autogpt_frontend/auth/presentation/sign_in/forgot_pass_page.dart";
 import "package:autogpt_frontend/agent_activation/presentation/agent_start_screen.dart";
 import "package:autogpt_frontend/auth/presentation/sign_in/sign_in_page.dart";
@@ -31,10 +33,12 @@ class AppWidget extends StatelessWidget {
             textTheme: appTextTheme),
         initialRoute: '/A',
         routes: {
-          '/A': (context) => SignInPage(),
-          '/B': (context) => AgentStartScreen(),
+          '/B': (context) => SignInPage(),
+          '/A': (context) => AgentStartScreen(),
           '/C': (context) => ForgotPassPage(),
-          '/D': (context) => SignUpPage()
+          '/D': (context) => SignUpPage(),
+          '/E': (context) => AgentRequestWindow(),
+          '/F': (context) => AgentCreateTaskWindow()
           // '/C': (context) => ProfilePage(),
           // home: AgentStartScreen(),
         });
